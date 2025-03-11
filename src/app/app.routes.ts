@@ -6,7 +6,12 @@ export const routes: Routes = [
         loadComponent:() => import('./core/authentication/authentication.component').then(m => m.AuthenticationComponent)
     },
     {
-        path:'main',
-        loadComponent:() => import('./core/authentication/authentication.component').then(m => m.AuthenticationComponent)
+        path:'home',
+        loadChildren:() => import('./core/core.routes').then(m => m.coreRoute)
+    },
+    {
+        path:'',
+        redirectTo:'home',
+        pathMatch:'full'
     }
 ];
