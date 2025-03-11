@@ -14,13 +14,19 @@ import { TablerIconComponent, provideTablerIcons } from 'angular-tabler-icons';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../../material.module';
 
+import { IconLayoutGridAdd, IconAperture, IconShoppingCart } from "angular-tabler-icons/icons";
+
 @Component({
   selector: 'app-nav-item',
   templateUrl: './nav-item.component.html',
   styleUrls: [],
   imports: [TablerIconComponent, MaterialModule, CommonModule],
   providers:[
-    provideTablerIcons({})
+    provideTablerIcons({
+      IconLayoutGridAdd,
+      IconAperture,
+      IconShoppingCart
+    })
   ]
 })
 export class AppNavItemComponent implements OnChanges {

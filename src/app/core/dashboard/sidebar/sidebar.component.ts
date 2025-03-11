@@ -9,13 +9,17 @@ import {
 import { BrandingComponent } from './branding.component';
 import { TablerIconComponent, provideTablerIcons } from 'angular-tabler-icons';
 import { MaterialModule } from '../../../material.module';
+import { IconNumber20Small } from "angular-tabler-icons/icons";
+
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   imports: [BrandingComponent, TablerIconComponent, MaterialModule],
   providers:[
-    provideTablerIcons({})
+    provideTablerIcons({
+      IconNumber20Small
+    })
   ]
 })
 export class SidebarComponent implements OnInit {

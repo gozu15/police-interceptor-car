@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MaterialModule } from '../../../material.module';
+import { IconMenu2, IconNumber18Small, IconBell, IconUser, IconMail, IconListCheck } from "angular-tabler-icons/icons";
+
 
 @Component({
   selector: 'app-header',
@@ -21,7 +23,14 @@ import { MaterialModule } from '../../../material.module';
     MaterialModule,
   ],
   providers:[
-    provideTablerIcons({})
+    provideTablerIcons({
+      IconMenu2,
+      IconNumber18Small,
+      IconBell,
+      IconUser,
+      IconMail,
+      IconListCheck
+    })
   ],
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,

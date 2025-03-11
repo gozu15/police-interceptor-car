@@ -10,9 +10,7 @@ import { navItems } from "./sidebar/sidebar-data";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { MaterialModule } from "../../material.module";
 import { NgScrollbarModule } from "ngx-scrollbar";
-import { TablerIconComponent, provideTablerIcons } from "angular-tabler-icons";
 import { MatSidenav, MatSidenavContent } from "@angular/material/sidenav";
-
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -27,13 +25,7 @@ const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
         CommonModule,
         SidebarComponent,
         NgScrollbarModule,
-        TablerIconComponent,
         HeaderComponent        
-    ],
-    providers:[
-        provideTablerIcons({
-
-        })
     ]
 })
 
