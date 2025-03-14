@@ -4,27 +4,34 @@
         <mat-card class="cardWithShadow boxed-auth">
           <mat-card-content class="p-32">
             <div class="text-center">
-                <a class="one" [routerLink]="['/dashboard']">
+                <a class="one" [routerLink]="['/authentication']">
                   <h1>LOGIN</h1>
                 </a>
             </div>
-            <form class="m-t-30">
+            <form [formGroup]="userCredentialsForm" class="m-t-30">
               <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Username</mat-label>
               <mat-form-field appearance="outline" class="w-100" color="primary">
-                <input matInput />
+                <input formControlName="username" matInput />
+                @if(verifyInputHasError('username','required')){       
+                  <span class="error">This field is required</span>
+                }
               </mat-form-field>
               <!-- password -->
               <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
               <mat-form-field appearance="outline" class="w-100" color="primary">
-                <input matInput type="password" />
+                <input formControlName="password" matInput type="password" />
+                @if(verifyInputHasError('password','required')){       
+                  <span class="error">This field is required</span>
+                }
+                @if(verifyInputHasError('password','min')){       
+                  <span class="error">The password is invalid, must have 8 characters</span>
+                }
               </mat-form-field>
   
               <div class="d-flex align-items-center m-b-12">
                 <mat-checkbox color="primary">Remember this Device</mat-checkbox>
-                <a [routerLink]="['/']" class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">Forgot Password
-                  ?</a>
               </div>
-              <a [routerLink]="['/']" mat-flat-button color="primary" class="w-100">
+              <a (click)="submit()" mat-flat-button color="primary" class="w-100">
                 Sign In
               </a>
               <!-- input -->

@@ -3,6 +3,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Component } from "@angular/core";
 import { MaterialModule } from "../../material.module";
 import { Router, RouterModule } from "@angular/router";
+import { AuthenticationStateService } from "./authentication.state.service";
+import { AuthenticationCredential } from "./models/authentication.model";
+import { checkInputForm } from "../../shared/tools/form-has-error.tools";
 
 @Component({
     selector:'authentication-app',
@@ -13,19 +16,28 @@ import { Router, RouterModule } from "@angular/router";
 })
 
 export class AuthenticationComponent{
-    constructor( private router: Router) {}
+    constructor( private router: Router, private authenticationStateService:AuthenticationStateService) {}
 
-    form = new FormGroup({
-      uname: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      password: new FormControl('', [Validators.required]),
+    userCredentialsForm = new FormGroup({
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
-  
-    get f() {
-      return this.form.controls;
-    }
   
     submit() {
       // console.log(this.form.value);
-      this.router.navigate(['/']);
+      this.userCredentialsForm.markAllAsTouched()
+      const formValid = this.userCredentialsForm.valid
+      if(formValid){
+        const credentials:AuthenticationCredential = {
+          username:this.userCredentialsForm.getRawValue().username as string,
+          password:this.userCredentialsForm.getRawValue().password as string
+        }
+        this.authenticationStateService.logIn(credentials)
+        this.router.navigate(['/']);
+      }
     }
-}
+
+    verifyInputHasError(formKey:string, errorCode:string){
+      return checkInputForm(this.userCredentialsForm,formKey,errorCode)
+    }
+  }

@@ -11,7 +11,7 @@ import { AuthenticationResponse } from "./models/auth-response.model";
 
 export class AuthenticationApiService{
     private urlApi = environment.apiUrl
-    private route = `${this.urlApi}auth`
+    private route = `${this.urlApi}auth/login`
 
     constructor(private factoryApi:FactoryApi){}
 
