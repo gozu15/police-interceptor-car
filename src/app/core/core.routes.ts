@@ -14,6 +14,10 @@ export const coreRoute:Routes=[
             {
                 path:'main',
                 loadComponent:() => import('../main/main.component').then(m => m.MainComponent)
+            },
+            {
+                path:'police-car-interceptor',
+                loadComponent:() => import('../map/map.component').then(m => m.MapComponent)
             }
         ]
     }
