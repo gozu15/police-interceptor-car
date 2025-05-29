@@ -1,9 +1,9 @@
 from fastapi import HTTPException, status, Request
 from sqlmodel import select
-from jwt import PyJWTError, decode as jwt_decode
+from jwt import PyJWTError
 
 from src.core.database import SessionDB
-from src.core.config import config
+from src.core.utils import decode_access_token
 from src.schemas.user import User
 
 
@@ -31,7 +31,7 @@ async def get_current_user(request: Request, db: SessionDB):
   )
 
   try:
-    payload = jwt_decode(token, config.JWT_SECRET_KEY, algorithms=[config.JWT_ALGORITHM])
+    payload = decode_access_token(token)
     username: int = payload.get("sub")
 
     if username is None:
