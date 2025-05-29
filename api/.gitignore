@@ -1,0 +1,12 @@
+.vscode/
+venv/
+__pycache__
+.env
+uploads/
+*.egg-info/
+
+# vim temporary files
+*~
+.*.sw?
+.cache
+.ruff_cache

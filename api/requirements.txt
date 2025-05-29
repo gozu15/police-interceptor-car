@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic-settings
+sqlmodel
+pymysql
+passlib[bcrypt]
+pyjwt
+python-dotenv
