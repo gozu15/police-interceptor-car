@@ -1,17 +1,17 @@
 from fastapi import HTTPException
 from sqlmodel import select
 
-from src.database import SessionDB
-from src.models.person import Person
-from src.schemas.person import PersonCreate, PersonUpdate
+from src.core.database import SessionDB
+from src.schemas.person import Person
+from src.models.person import PersonCreate, PersonUpdate
 
 
-def getAll(db: SessionDB, offset: int = 0, limit: int = 100) -> list[Person]:
-  db_users = db.exec(select(Person).offset(offset).limit(limit)).all()
+def getAll(db: SessionDB) -> list[Person]:
+  db_users = db.exec(select(Person).offset(0).limit(100)).all()
   return db_users
 
 
-def getOne(db: SessionDB, id: int) -> Person:
+def getOne(id: int, db: SessionDB) -> Person:
   db_person = db.exec(select(Person).where(Person.id == id)).first()
 
   if db_person is None:
@@ -20,10 +20,7 @@ def getOne(db: SessionDB, id: int) -> Person:
     return db_person
 
 
-def create(
-  db: SessionDB,
-  input: PersonCreate,
-):
+def create(input: PersonCreate, db: SessionDB) -> Person:
   db_person = db.exec(select(Person).where(Person.identification_number == input.identification_number)).first()
 
   if db_person is not None:
@@ -42,11 +39,7 @@ def create(
   return new_person
 
 
-def update(
-  db: SessionDB,
-  id: int,
-  input: PersonUpdate,
-) -> Person:
+def update(id: int, input: PersonUpdate, db: SessionDB) -> Person:
   db_person = db.exec(select(Person).where(Person.id == id)).first()
 
   if db_person is None:
@@ -65,7 +58,7 @@ def update(
     return db_person
 
 
-def delete(db: SessionDB, id: int) -> bool:
+def delete(id: int, db: SessionDB) -> bool:
   db_person = db.exec(select(Person).where(Person.id == id)).first()
 
   if db_person is None:

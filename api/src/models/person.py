@@ -1,26 +1,41 @@
-from sqlmodel import SQLModel, Field
-from sqlalchemy import func
 from typing import Optional
-from datetime import datetime, timezone
+from pydantic import BaseModel
+from datetime import datetime
 
-from src.models.enums import Gender, Type
+from src.schemas.enums import Gender, Type
 
 
-class Person(SQLModel, table=True):
-  __tablename__ = "persons"
+class Person(BaseModel):
+  id: int
+  photo: Optional[str] = None
+  identification_number: str
+  name: str
+  last_name: str
+  gender: Gender
+  birthdate: datetime
+  type: Type
+  email: str
+  created_at: datetime
+  updated_at: datetime
 
-  id: Optional[int] = Field(default=None, primary_key=True)
 
-  photo: Optional[str] = Field(default=None)
-  identification_number: str = Field(unique=True)
-  name: str = Field()
-  last_name: str = Field()
-  gender: Gender = Field()
-  birthdate: datetime = Field()
-  type: Type = Field()
-  email: str = Field(index=True, unique=True)
+class PersonCreate(BaseModel):
+  photo: Optional[str] = None
+  identification_number: str
+  name: str
+  last_name: str
+  gender: Gender
+  birthdate: datetime
+  type: Type
+  email: str
 
-  created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
-  updated_at: datetime = Field(
-    default_factory=lambda: datetime.now(timezone.utc), nullable=False, sa_column_kwargs={"onupdate": func.now()}
-  )
+
+class PersonUpdate(BaseModel):
+  photo: Optional[str] = None
+  identification_number: Optional[str] = None
+  name: Optional[str] = None
+  last_name: Optional[str] = None
+  gender: Optional[Gender] = None
+  birthdate: Optional[datetime] = None
+  type: Optional[Type] = None
+  email: Optional[str] = None

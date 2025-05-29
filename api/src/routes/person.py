@@ -1,33 +1,37 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Security
+from fastapi.security import HTTPBearer
 
-from src.database import SessionDB
-from src.schemas.person import PersonCreate, PersonUpdate
+from src.core.database import SessionDB
+from src.core.helper import get_current_user
+from src.models.person import Person, PersonCreate, PersonUpdate
 import src.controllers.person_controller as PersonController
 
+bearer_scheme = HTTPBearer()
+router = APIRouter(
+  dependencies=[Security(bearer_scheme), Depends(get_current_user)],
+)
 
-router = APIRouter()
 
-
-@router.get("/", name="Get all persons")
+@router.get("/", name="Get all persons", response_model=list[Person])
 def getAll(db: SessionDB):
   return PersonController.getAll(db)
 
 
-@router.get("/{id}", name="Get a person by id")
-def getOne(db: SessionDB, id: int):
-  return PersonController.getOne(db, id)
+@router.get("/{id}", name="Get a person by id", response_model=Person)
+def getOne(id: int, db: SessionDB):
+  return PersonController.getOne(id, db)
 
 
-@router.post("/person", name="Create a new person")
-def create(db: SessionDB, data: PersonCreate):
-  return PersonController.create(db, data)
+@router.post("/person", name="Create a new person", response_model=Person)
+def create(data: PersonCreate, db: SessionDB):
+  return PersonController.create(data, db)
 
 
-@router.patch("/{id}", name="Update a person")
-def update(db: SessionDB, id: int, input: PersonUpdate):
-  return PersonController.update(db, id, input)
+@router.patch("/{id}", name="Update a person", response_model=Person)
+def update(id: int, input: PersonUpdate, db: SessionDB):
+  return PersonController.update(id, input, db)
 
 
-@router.delete("/{id}", name="Delete a person")
-def delete(db: SessionDB, id: int):
-  return PersonController.delete(db, id)
+@router.delete("/{id}", name="Delete a person", response_model=bool)
+def delete(id: int, db: SessionDB):
+  return PersonController.delete(id, db)

@@ -3,7 +3,7 @@ from sqlalchemy import func
 from typing import Optional
 from datetime import datetime, timezone
 
-from src.models.enums import Gender
+from src.schemas.enums import Gender
 
 
 class User(SQLModel, table=True):

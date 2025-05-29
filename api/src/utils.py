@@ -1,7 +1,7 @@
 import jwt
 from datetime import datetime, timedelta
 
-from src.config import config
+from src.core.config import config
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:

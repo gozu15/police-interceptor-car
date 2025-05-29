@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 from passlib.context import CryptContext
 
-from src.database import engine, create_db_and_tables
+from src.core.database import engine, create_db_and_tables
 from src.models.user import User
 from src.models.enums import Gender
 
