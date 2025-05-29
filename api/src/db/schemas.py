@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import func
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from enum import Enum
 
 
@@ -55,7 +55,7 @@ class Person(SQLModel, table=True):
   name: str = Field()
   last_name: str = Field()
   gender: Gender = Field()
-  birthdate: datetime = Field()
+  birthdate: date = Field()
   type: Type = Field()
   email: str = Field(index=True, unique=True)
 

@@ -19,7 +19,7 @@ class AuthResponse(BaseModel):
 
 class User(BaseModel):
   id: int
-  photo: Optional[str] = None
+  photo: str | None = None
   identification_number: str
   name: str
   last_name: str

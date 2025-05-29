@@ -27,7 +27,7 @@ def create(data: AreaCreate, db: SessionDB):
   return AreaController.create(data, db)
 
 
-@router.patch("/{id}", name="Update a area", response_model=Area)
+@router.patch("/{id}", name="Update a area", response_model=AreaUpdate)
 def update(id: int, input: AreaUpdate, db: SessionDB):
   return AreaController.update(id, input, db)
 

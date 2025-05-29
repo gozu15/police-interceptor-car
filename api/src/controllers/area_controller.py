@@ -37,7 +37,7 @@ def create(input: AreaCreate, db: SessionDB) -> Area:
   return new_area
 
 
-def update(id: int, input: AreaUpdate, db: SessionDB) -> Area:
+def update(id: int, input: AreaUpdate, db: SessionDB) -> AreaUpdate:
   db_area = db.exec(select(Area).where(Area.id == id)).first()
 
   if db_area is None:

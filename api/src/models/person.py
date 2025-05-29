@@ -1,18 +1,17 @@
-from typing import Optional
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date, datetime
 
 from src.db.schemas import Gender, Type
 
 
 class Person(BaseModel):
   id: int
-  photo: Optional[str] = None
+  photo: str | None = None
   identification_number: str
   name: str
   last_name: str
   gender: Gender
-  birthdate: datetime
+  birthdate: date
   type: Type
   email: str
   created_at: datetime
@@ -20,22 +19,22 @@ class Person(BaseModel):
 
 
 class PersonCreate(BaseModel):
-  photo: Optional[str] = None
+  photo: str | None = None
   identification_number: str
   name: str
   last_name: str
   gender: Gender
-  birthdate: datetime
+  birthdate: date
   type: Type
   email: str
 
 
 class PersonUpdate(BaseModel):
-  photo: Optional[str] = None
-  identification_number: Optional[str] = None
-  name: Optional[str] = None
-  last_name: Optional[str] = None
-  gender: Optional[Gender] = None
-  birthdate: Optional[datetime] = None
-  type: Optional[Type] = None
-  email: Optional[str] = None
+  photo: str | None = None
+  identification_number: str | None = None
+  name: str | None = None
+  last_name: str | None = None
+  gender: Gender | None = None
+  birthdate: date | None = None
+  type: Type | None = None
+  email: str | None = None

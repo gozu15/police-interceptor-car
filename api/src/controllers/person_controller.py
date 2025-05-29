@@ -39,7 +39,7 @@ def create(input: PersonCreate, db: SessionDB) -> Person:
   return new_person
 
 
-def update(id: int, input: PersonUpdate, db: SessionDB) -> Person:
+def update(id: int, input: PersonUpdate, db: SessionDB) -> PersonUpdate:
   db_person = db.exec(select(Person).where(Person.id == id)).first()
 
   if db_person is None:

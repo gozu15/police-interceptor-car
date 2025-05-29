@@ -27,7 +27,7 @@ def create(data: PersonCreate, db: SessionDB):
   return PersonController.create(data, db)
 
 
-@router.patch("/{id}", name="Update a person", response_model=Person)
+@router.patch("/{id}", name="Update a person", response_model=PersonUpdate)
 def update(id: int, input: PersonUpdate, db: SessionDB):
   return PersonController.update(id, input, db)
 
