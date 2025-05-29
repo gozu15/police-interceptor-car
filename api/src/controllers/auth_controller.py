@@ -3,8 +3,8 @@ from sqlmodel import select
 from datetime import timedelta
 
 from src.core.config import config
-from src.core.database import SessionDB
-from src.schemas.user import User
+from src.db.database import SessionDB
+from src.db.schemas import User
 from src.models.auth import UserLogin, AuthResponse
 from src.core.utils import create_access_token, verify_password
 

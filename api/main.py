@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.core.database import create_db_and_tables
+from src.db.database import create_db_and_tables
 from src.core.config import config
 from src.routes.auth import router as auth_router
 from src.routes.person import router as person_router
+from src.routes.area import router as area_router
 
 
 async def on_startup():
@@ -26,6 +27,7 @@ app.add_middleware(
 # Routers
 app.include_router(auth_router, prefix="/v1/auth", tags=["Auth"])
 app.include_router(person_router, prefix="/v1/person", tags=["Person"])
+app.include_router(area_router, prefix="/v1/area", tags=["Area"])
 
 
 # Main Route

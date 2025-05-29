@@ -2,10 +2,9 @@ from fastapi import APIRouter, Depends, Security
 from fastapi.security import HTTPBearer
 from typing import Annotated
 
-from src.core.database import SessionDB
+from src.db.database import SessionDB
 from src.core.helper import get_current_user
-from src.schemas.user import User
-from src.models.auth import UserLogin, AuthResponse
+from src.models.auth import User, UserLogin, AuthResponse
 import src.controllers.auth_controller as AuthController
 
 bearer_scheme = HTTPBearer()

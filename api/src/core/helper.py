@@ -2,12 +2,13 @@ from fastapi import HTTPException, status, Request
 from sqlmodel import select
 from jwt import PyJWTError
 
-from src.core.database import SessionDB
+from src.db.database import SessionDB
+from src.db.schemas import User as UserSchema
 from src.core.utils import decode_access_token
-from src.schemas.user import User
+from src.models.auth import User
 
 
-async def get_current_user(request: Request, db: SessionDB):
+async def get_current_user(request: Request, db: SessionDB) -> User:
   authorization: str | None = request.headers.get("Authorization")
   if not authorization:
     raise HTTPException(
@@ -39,7 +40,7 @@ async def get_current_user(request: Request, db: SessionDB):
   except PyJWTError:
     raise credentials_exception
 
-  user = db.exec(select(User).where(User.username == username)).first()
+  user = db.exec(select(UserSchema).where(UserSchema.username == username)).first()
   if user is None:
     raise credentials_exception
 

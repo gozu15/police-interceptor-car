@@ -1,8 +1,8 @@
 from fastapi import HTTPException
 from sqlmodel import select
 
-from src.core.database import SessionDB
-from src.schemas.person import Person
+from src.db.database import SessionDB
+from src.db.schemas import Person
 from src.models.person import PersonCreate, PersonUpdate
 
 
@@ -46,8 +46,6 @@ def update(id: int, input: PersonUpdate, db: SessionDB) -> Person:
     raise HTTPException(status_code=404, detail="Person not found")
   else:
     person_data = input.model_dump(exclude_unset=True)
-
-    print(person_data)
 
     for key, value in person_data.items():
       setattr(db_person, key, value)

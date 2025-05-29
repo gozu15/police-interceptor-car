@@ -1,9 +1,8 @@
 from sqlmodel import Session, select
 from passlib.context import CryptContext
 
-from src.core.database import engine, create_db_and_tables
-from src.models.user import User
-from src.models.enums import Gender
+from src.db.database import engine, create_db_and_tables
+from src.db.schemas import User, Gender
 
 
 def seed_admin_user():

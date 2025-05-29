@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel
 from datetime import datetime
 
-from src.schemas.enums import Gender, Type
+from src.db.schemas import Gender, Type
 
 
 class Person(BaseModel):

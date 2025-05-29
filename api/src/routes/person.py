@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Security
 from fastapi.security import HTTPBearer
 
-from src.core.database import SessionDB
+from src.db.database import SessionDB
 from src.core.helper import get_current_user
 from src.models.person import Person, PersonCreate, PersonUpdate
 import src.controllers.person_controller as PersonController
